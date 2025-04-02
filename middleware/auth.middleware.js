@@ -14,12 +14,12 @@ export const protectRoute = async(req, res, next) => {
        
         const user = await Portfolio.findOne({username:decoded.username});
         if(!user){
-            return res.status(401).send("user not found");
+            return res.status(404).send("user not found");
         } 
         req.user = user;
         next();// move to next middleware
     } catch (error) {
-        return res.status(401).send("some network error occured");
+        return res.status(501).send("some network error occured");
         next()
     }
     

@@ -187,6 +187,18 @@ export const delete_portfolio= async (req,res)=>{
     if(!user){
         return res.status(404).json({error:"Portfolio not found"})
     }
+    // delete cloudinary images
+            const profile_pic = user.profilePic;
+            if (profile_pic) {
+              //  console.log("Deleting previous profile picture from Cloudinary:", previousPic);
+                const urlParts = profile_pic.split("/");
+                const public_id = urlParts[urlParts.length - 1].split(".")[0];
+
+                // Add the folder to the public_id if it exists
+                const folder = urlParts[urlParts.length - 2];
+                const fullPublicId = folder ? `${folder}/${public_id}` : public_id;
+                await cloudinaryUpload.uploader.destroy(fullPublicId);
+            }
 
     await Portfolio.deleteOne({username:user.username});
     await person.deleteOne({email:user.email});
@@ -347,7 +359,6 @@ export const update_twitter =async (req,res)=>{
     res.json({message:"twitter updated!"})
 }
 export const update_email =async (req,res)=>{
-    const username=req.params.username;
     const user = req.user;    
     if(!user){
         return res.status(404).json({error:"Portfolio not found"})
@@ -356,6 +367,11 @@ export const update_email =async (req,res)=>{
     if(email===null || email===undefined){
         return res.status(400).json({error:"email is required"})
     }
+    const already_email = await person.findOne({ email: email });
+    if (already_email) {
+        already_email.email=email;
+        await already_email.save();
+       }
     user.email=email;
     await user.save();
     res.json({message:"email updated!"})
