@@ -3,7 +3,7 @@ const PortfolioSchema = new mongoose.Schema({
     username:String,
     name: String,
     resume: String, // Resume link
-    profilePic: {type:String ,default: "https://res.cloudinary.com/dmmwlsock/image/upload/v1742511312/portfolio/jd16vkexyn6q64ooltg5.jpg"}, // Cloudinary URL
+    profilePic: type:String , // Cloudinary URL
     about: String,
     linkedin: String,
     github: String,
@@ -13,8 +13,7 @@ const PortfolioSchema = new mongoose.Schema({
             title: {type:String},
             description: String,
             imageUrl: {
-                type: String,
-                default:"https://res.cloudinary.com/dmmwlsock/image/upload/v1742555588/portfolio/go2x0zwitrst7vtnp1ne.png"
+                type: String
             },
             link: String
         }
@@ -29,8 +28,7 @@ const PortfolioSchema = new mongoose.Schema({
             endDate: Date,
             description: String,
             imageUrl: {
-                type: String,
-                default:"https://res.cloudinary.com/dmmwlsock/image/upload/v1742704323/portfolio/sbt1ebmtvim89f5qcjwl.jpg"
+                type: String
             }
         }
     ],
@@ -41,8 +39,7 @@ const PortfolioSchema = new mongoose.Schema({
             startDate: Date,
             endDate: Date,
             imageUrl: {
-                type: String,
-                default:"https://res.cloudinary.com/dmmwlsock/image/upload/v1742704062/portfolio/dntqohn5gtm8k7qcutmj.jpg"
+                type: String
             },
             marks:String
         }
