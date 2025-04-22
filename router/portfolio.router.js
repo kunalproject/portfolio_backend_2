@@ -12,6 +12,9 @@ router.get('/protected-route', protectRoute, (req, res) => {
   // This will only be accessible if protectRoute passes
   res.json({ user: req.user });
 });
+router.put('/get_all_message',protectRoute,(req, res) => {
+  res.json({ messages: req.user.messages });
+});
 router.delete("/delete_portfolio",protectRoute,delete_portfolio);
 router.post('/add_skill',protectRoute,add_skill);
 router.delete('/delete_skill',protectRoute,delete_skill);
