@@ -212,6 +212,12 @@ export const get_portfolio = async (req, res) => {
     }
     res.json(user);
 }
+export const get_all_message=async(req,res)=>{
+    const user =req.user;
+    if(!user){
+        return res.status(404).json({error:"user not found"})}
+    return user.messages;
+}
 export const add_experience = async (req, res) => {
      const user= req.user;
      if(!user){
