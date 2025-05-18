@@ -25,10 +25,13 @@ export const signup = async (req, res) => {
     set_cookies(res, access_token); 
     const web_url =`${process.env.PORTFOLIO_URL}/${username}`;
     const message=`
-    <h1>Congratulations, ${name},</h1>
+    <h1>Hi, ${name},</h1>
     <p>Your portfolio website is now ready and can be accessed at this <a href="${web_url}">web link</a>
   . Please fill out the form on the website to display the complete details of your portfolio.</p>
-    <p>Hope you have a great experience with us.</p>`
+    <br> 
+    Best regards, 
+    <br>
+    kunal`
     const subject='Portfolio Website Ready';
     send_mail(email,message,subject);
     res.status(201).json({ "user": saved_user,"portfolio":new_portfolio,access_token });
